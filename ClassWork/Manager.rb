@@ -14,14 +14,16 @@ class Manager < Employee
     def bonus(mulitplier)
         queue = @subordinates 
         (0...queue.length).each do |i|
+            p i 
             el = queue[i]
             if el.is_a?(Manager)
                 queue += el.subordinates
             end
         end
+
         sum = queue.map(&:salary).sum * mulitplier
-        # final = sum.to_s.split_at_index("_", -3)
     end
+    # final = sum.to_s.split_at_index("_", -3)
 
     # def bonus(mulitplier)
     #     queue = @subordinates 
@@ -41,10 +43,10 @@ darren = Manager.new("Darren", 78000, "TA Manager", "Ned")
 shawna = Employee.new("Shawna", 12000, "TA", "Darren")
 david = Employee.new("David", 10000, "TA", "Darren")
 
-ned.add_sub(darren)
+# ned.add_sub(darren)
 
 
-darren.add_sub(shawna)
-darren.add_sub(david)
+# darren.add_sub(shawna)
+# darren.add_sub(david)
 p ned.bonus(5)
-p darren.bonus(4)
+# p darren.bonus(4)

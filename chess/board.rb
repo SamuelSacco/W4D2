@@ -1,11 +1,10 @@
-# require_relative "./piece.rb"
+require_relative "./null_piece.rb"
+require_relative "./piece.rb"
 class Board
     attr_reader :rows
     def initialize
-        @rows = Array.new(8) { Array.new(8)} #{ NullPiece.new}
-        # @null_piece: NullPiece
+        @rows = Array.new(8) { Array.new(8) {Piece.new} }
     end
-
 
     def [](pos)
         row, col = pos
@@ -18,25 +17,18 @@ class Board
     end
 
     def place_pieces
-        (0...rows.length).each do |i|
-            if i == 0 || i == 1 || i == 6 || i == 7
-                rows[i].each do |j|
-                    rows[i][j] = Piece.new
-                end
+        (2...@rows.length - 2).each do |i|
+            (0...@rows.length).each do |j|
+                @rows[i][j] = NullPiece.new
             end
-
         end
-
     end
 
     def move_piece(start_pos, end_pos)
-        if start_pos.all?{|ele| ele.between?(0,7)} == true
-        else
-            raise "Piece not in original position"
-        end
-
-
-
+        raise "THERE IS NO PIECE THERE IDIOT" if !self[start_pos].is_a?(Piece) #cehcks to see if start position is a piece
+        raise "THAT SPOT IS OFF THE BOARD IDIOT" if end_pos.all?{|ele| ele.between?(0,7)} == false #checks to see if end popsition is out of bounds
+        self[start_pos] = NullPiece.new
+        self[end_pos] = Piece.new
     end
 
     def valid_pos?(pos)
@@ -73,15 +65,14 @@ class Board
 
     def render
         @rows.each do |ele|
-            puts ele.join(" ")
+            puts ele.map(&:symbol).join(" ")
         end
     end
 
 
 end
-
-# br = Board.new
-# p br
 b = Board.new
-# p b
-p b.render
+b.place_pieces
+# b.render
+b.move_piece([0,0],[20,5])
+b.render
