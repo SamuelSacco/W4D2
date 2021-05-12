@@ -1,20 +1,27 @@
+require_relative 'piece'
+require_relative 'stepable'
+   
 class Knight < Piece
-    # include Stepable
-    def initialize(color, board, start_pos)
-        super
-        @symbol = :n
-    end
-    private
-    def move_diffs
-        [
-            [2,  1],
-            [2, -1],
-            [1,  2],
-            [1, -2],
-            [-2, 1],
-            [-2,-1],
-            [-1, 2],
-            [-1,-2]
-        ]
-    end
+   
+  include Stepable
+
+  def symbol
+    '♞'.colorize(color)
+  end
+
+  protected
+
+  def move_diffs
+    MOVES = [
+        [1,2],
+        [-1,2],
+        [2,1],
+        [2,-1],
+        [-1,2],
+        [-1,-2],
+        [-2,1],
+        [-2,-1]
+    ]
+    # return an array of diffs representing where a Knight can step to
+  end
 end
