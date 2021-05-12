@@ -1,10 +1,18 @@
 require_relative 'piece'
 require_relative 'stepable'
 
-class King 
-    
+class King < Piece
     include Stepable
-
+    MOVES = [
+        [1,1],
+        [1,0],
+        [0,1],
+        [-1,-1],
+        [-1,1],
+        [1,-1],
+        [0,-1],
+        [-1,0]
+    ]
     def symbol
         '♚'.colorize(color)
     end
@@ -12,17 +20,9 @@ class King
     protected
     
     def move_diffs
-    MOVES = [
-    [1,1],
-    [1,0],
-    [0,1],
-    [-1,-1],
-    [-1,1],
-    [1,-1],
-    [0,-1],
-    [-1,0]
-    ]
-    
+        MOVES
         # return an array of diffs representing where a King can step to
     end
 end
+
+[[1, 5], [1, 4], [-1, 3], [-1, 5], [1, 3], [-1, 4]]

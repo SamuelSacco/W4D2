@@ -12,7 +12,7 @@ class Queen < Piece
 
   def move_dirs
 
-        self.horizontal_vetical_dirs + self.diagonal_dirs
+    self.horizontal_vetical_dirs + self.diagonal_dirs
     # return the directions in which a queen can move
     # a queen can move horizontally (across rows and columns) and diagonally
   end

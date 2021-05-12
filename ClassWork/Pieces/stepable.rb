@@ -1,23 +1,30 @@
 module Stepable
-    def moves
-      # create array to collect moves
-  
-      # iterate through each of the piece's possible move_diffs
-        # for each move_diff, increment the piece's position to generate a new position
-        # add the new position to the moves array if it is:
-          # on the board and empty
-          # OR on the board and contains a piece of the opposite color
-  
-      # return the final array of moves
+  def moves
+    moves = []
+
+    move_diffs.each do |delta|
+        x, y = self.pos
+        dx, dy = delta
+        new_pos = [x + dx, y + dy]
+        if !new_pos[0].between?(0,7) || !new_pos[1].between?(0,7)
+          next
+        elsif board[new_pos].color == self.color
+          next
+        else   
+          moves << new_pos
+        end
     end
-  
-    private
-  
-    def move_diffs
-      # subclass implements this
-      raise NotImplementedError
-    end
+    
+    moves
   end
+
+  private
+
+  def move_diffs
+  # subclass implements this
+  raise NotImplementedError
+  end
+end
   
   
   # Note: you can invoke methods from the piece from within the module methods, and vice versa. It is a two way street!
