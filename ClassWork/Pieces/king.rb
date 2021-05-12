@@ -1,4 +1,9 @@
-class King 
+require_relative 'piece'
+require_relative 'stepable'
+
+class King < Piece
+include Stepable
+
     MOVES = [
         [1,1],
         [1,0],
@@ -9,8 +14,14 @@ class King
         [0,-1],
         [-1,0]
         ]
-        
-    def move_diffs
+  
+  def symbol
+    '♚'.colorize(color)
+  end
 
-    end
+  protected
+
+  def move_diffs
+    MOVES
+  end
 end

@@ -1,12 +1,8 @@
+
 class Knight < Piece
-    # include Stepable
-    def initialize(color, board, start_pos)
-        super
-        @symbol = :n
-    end
-    private
-    def move_diffs
-        [
+  include Stepable
+
+    MOVES = [
             [2,  1],
             [2, -1],
             [1,  2],
@@ -16,5 +12,14 @@ class Knight < Piece
             [-1, 2],
             [-1,-2]
         ]
-    end
+        
+  def symbol
+    '♞'.colorize(color)
+  end
+
+  protected
+
+  def move_diffs
+   MOVES
+  end
 end
