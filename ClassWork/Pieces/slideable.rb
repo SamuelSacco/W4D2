@@ -1,3 +1,6 @@
+class NotImplementedError < StandardError; end
+
+
 module Slideable
 
   HORIZONTAL_VERTICAL_DIRS = [
@@ -36,22 +39,25 @@ module Slideable
 
   def move_dirs
     # subclass implements this
-    # raise NotImplementedError # this only executes if 
+    raise NotImplementedError # this only executes if 
   end
 
   def grow_unblocked_moves_in_dir(dx, dy)
     moves = []
-    
     x, y = self.pos
-    while x.between?(0,7) && y.between?(0,7)
-        break if board[[x,y]].color == self.color
-        moves << [x,y]
-        x += dx
-        y += dy
-    end
 
+    loop do
+      x += dx 
+      y += dy
+      break if !x.between?(0,7) || !y.between?(0,7)
+      break if self.board[[x,y]].color == self.color
+      moves << [x,y]
+      break if self.board[[x,y]].color != self.color
+    end
+    
     moves
   end
+
 end
 
     # get the piece's current row and current column

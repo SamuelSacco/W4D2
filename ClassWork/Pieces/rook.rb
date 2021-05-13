@@ -11,7 +11,6 @@ class Rook < Piece
   protected
 
   def move_dirs
-
     horizontal_vetical_dirs
     # return the directions in which a rook can move
     # a rook can move horizontally (across rows and columns)

@@ -92,5 +92,4 @@ end
 
 b = Board.new
 b.render
-queen = b[[7,4]]
-p queen.moves
+p b[[0,0]].moves
